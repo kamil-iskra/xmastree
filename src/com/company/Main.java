@@ -1,102 +1,143 @@
 package com.company;
 
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        int rows = 5, k = 0;
+        String item, direction;
+        int level;
 
-        for(int i = 1; i <= rows; ++i, k = 0) {
-            for(int space = 1; space <= rows - i; ++space) {
-                System.out.print(" ");
-            }
+        Scanner inLevel = new Scanner(System.in);
+        Scanner inChar = new Scanner(System.in);
+        Scanner inDirection = new Scanner(System.in);
 
-            while(k != 2 * i - 1) {
-                System.out.print("*");
-                ++k;
-            }
-
-            System.out.println();
+        System.out.println("Enter a level (number from 1 to 9)");
+        while (!inLevel.hasNext("[1-9]")) {
+            System.out.println("That's not a valid number!");
+            inLevel.next();
         }
-
-        System.out.println("-----------");
-
-        int rows_2 = 5;
-
-        for(int i = rows_2; i >= 1; --i) {
-            for(int space = 1; space <= rows_2 - i; ++space) {
-                System.out.print(" ");
-            }
-
-            for(int j=i; j <= 2 * i - 1; ++j) {
-                System.out.print("*");
-            }
-
-            for(int j = 0; j < i - 1; ++j) {
-                System.out.print("*");
-            }
-
-            System.out.println();
+        level = Integer.parseInt(inLevel.next());
+        System.out.println("You entered level: " + level);
+        //
+        System.out.println("Enter a one char (alphabetic and special chars allowed)");
+        while (!inChar.hasNext("[A-Za-z`!@#$%^&*()-_+=]{1}")) {
+            System.out.println("That's not a valid char!");
+            inChar.next();
         }
+        item = inChar.next();
+        System.out.println("You entered char: " + item);
 
-        System.out.println("-----------");
-
-        int rows_3 = 5;
-
-        for(int i = 1; i < rows_3; ++i) {
-
-            for(int space = rows_3 - i; space >= 1; --space) {
-                System.out.print(" ");
-            }
-
-            for(int j=2 * i - 1; j >= i; --j) {
-                System.out.print("*");
-            }
-
-            System.out.println();
+        System.out.println("Enter a tree direction (up, down, left, right");
+        while (!inDirection.hasNext("\\bup\\b|\\bdown\\b|\\bleft\\b|\\bright\\b")) {
+            System.out.println("That's not a correct direction!");
+            inDirection.next();
         }
+        direction = inDirection.next();
+        System.out.println("Direction: " + direction);
 
-        for(int i = rows_3; i >= 1; --i) {
+        switch (direction) {
+            case "up": {
+                int k = 0;
 
-            for(int space = 1; space <= rows_3 - i; ++space) {
-                System.out.print(" ");
+                for (int i = 1; i <= level; ++i, k = 0) {
+                    for (int space = 1; space <= level - i; ++space) {
+                        System.out.print(" ");
+                    }
+
+                    while (k != 2 * i - 1) {
+                        System.out.print(item);
+                        ++k;
+                    }
+
+                    System.out.println();
+                }
+                break;
             }
 
-            for(int j=i; j <= 2 * i - 1; ++j) {
-                System.out.print("*");
+            case "down": {
+
+                for (int i = level; i >= 1; --i) {
+                    for (int space = 1; space <= level - i; ++space) {
+                        System.out.print(" ");
+                    }
+
+                    for (int j = i; j <= 2 * i - 1; ++j) {
+                        System.out.print(item);
+                    }
+
+                    for (int j = 0; j < i - 1; ++j) {
+                        System.out.print(item);
+                    }
+
+                    System.out.println();
+                }
+                break;
             }
 
-            System.out.println();
-        }
+            case "left": {
 
-        System.out.println("-----------");
+                for (int i = 1; i < level; ++i) {
 
-        int rows_4 = 4;
+                    for (int space = level - i; space >= 1; --space) {
+                        System.out.print(" ");
+                    }
 
-        for(int i = rows_4; i >= 1; --i) {
+                    for (int j = 2 * i - 1; j >= i; --j) {
+                        System.out.print(item);
+                    }
 
-            for(int space = 1; space <= rows_4 - i + 1; ++space) {
-                System.out.print("*");
+                    System.out.println();
+                }
+
+                for (int i = level; i >= 1; --i) {
+
+                    for (int space = 1; space <= level - i; ++space) {
+                        System.out.print(" ");
+                    }
+
+                    for (int j = i; j <= 2 * i - 1; ++j) {
+                        System.out.print(item);
+                    }
+
+                    System.out.println();
+                }
+                break;
             }
 
-            for(int j=i; j <= 2 * i - 1; ++j) {
-                System.out.print(" ");
+            case "right": {
+
+                for (int i = level; i >= 1; --i) {
+
+                    for (int space = 1; space <= level - i + 1; ++space) {
+                        System.out.print(item);
+                    }
+
+                    for (int j = i; j <= 2 * i - 1; ++j) {
+                        System.out.print(" ");
+                    }
+
+                    System.out.println();
+                }
+
+                for (int i = 1; i <= level; ++i) {
+
+                    for (int space = level - i; space >= 1; --space) {
+                        System.out.print(item);
+                    }
+
+                    for (int j = 2 * i - 1; j >= i; --j) {
+                        System.out.print(" ");
+                    }
+
+                    System.out.println();
+                }
+                break;
             }
 
-            System.out.println();
-        }
-
-        for(int i = 1; i <= rows_4; ++i) {
-
-            for(int space = rows_4 - i; space >= 1; --space) {
-                System.out.print("*");
-            }
-
-            for(int j=2 * i - 1; j >= i; --j) {
-                System.out.print(" ");
-            }
-
-            System.out.println();
+            default:
+                System.out.println("Nieprawidowy kierunek!");
         }
     }
 }
