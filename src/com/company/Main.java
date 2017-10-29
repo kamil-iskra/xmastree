@@ -21,7 +21,7 @@ public class Main {
         level = Integer.parseInt(inLevel.next());
         System.out.println("You entered level: " + level);
         //
-        System.out.println("Enter a one char (alphabetic and special chars allowed)");
+        System.out.println("Enter a one char (letters and special chars allowed)");
         while (!inChar.hasNext("[A-Za-z`!@#$%^&*()-_+=]{1}")) {
             System.out.println("That's not a valid char!");
             inChar.next();
@@ -39,105 +39,39 @@ public class Main {
 
         switch (direction) {
             case "up": {
-                int k = 0;
 
-                for (int i = 1; i <= level; ++i, k = 0) {
-                    for (int space = 1; space <= level - i; ++space) {
-                        System.out.print(" ");
-                    }
+                UpTreeBuilder upTree = new UpTreeBuilder();
+                upTree.build(level, item);
 
-                    while (k != 2 * i - 1) {
-                        System.out.print(item);
-                        ++k;
-                    }
-
-                    System.out.println();
-                }
                 break;
             }
 
             case "down": {
 
-                for (int i = level; i >= 1; --i) {
-                    for (int space = 1; space <= level - i; ++space) {
-                        System.out.print(" ");
-                    }
+                DownTreeBuilder downTree = new DownTreeBuilder();
+                downTree.build(level, item);
 
-                    for (int j = i; j <= 2 * i - 1; ++j) {
-                        System.out.print(item);
-                    }
-
-                    for (int j = 0; j < i - 1; ++j) {
-                        System.out.print(item);
-                    }
-
-                    System.out.println();
-                }
                 break;
             }
 
             case "left": {
 
-                for (int i = 1; i < level; ++i) {
+                LeftTreeBuilder leftTree = new LeftTreeBuilder();
+                leftTree.build(level, item);
 
-                    for (int space = level - i; space >= 1; --space) {
-                        System.out.print(" ");
-                    }
-
-                    for (int j = 2 * i - 1; j >= i; --j) {
-                        System.out.print(item);
-                    }
-
-                    System.out.println();
-                }
-
-                for (int i = level; i >= 1; --i) {
-
-                    for (int space = 1; space <= level - i; ++space) {
-                        System.out.print(" ");
-                    }
-
-                    for (int j = i; j <= 2 * i - 1; ++j) {
-                        System.out.print(item);
-                    }
-
-                    System.out.println();
-                }
                 break;
             }
 
             case "right": {
 
-                for (int i = level; i >= 1; --i) {
+                RightTreeBuilder rightTree = new RightTreeBuilder();
+                rightTree.build(level, item);
 
-                    for (int space = 1; space <= level - i + 1; ++space) {
-                        System.out.print(item);
-                    }
-
-                    for (int j = i; j <= 2 * i - 1; ++j) {
-                        System.out.print(" ");
-                    }
-
-                    System.out.println();
-                }
-
-                for (int i = 1; i <= level; ++i) {
-
-                    for (int space = level - i; space >= 1; --space) {
-                        System.out.print(item);
-                    }
-
-                    for (int j = 2 * i - 1; j >= i; --j) {
-                        System.out.print(" ");
-                    }
-
-                    System.out.println();
-                }
                 break;
             }
 
             default:
-                System.out.println("Nieprawidowy kierunek!");
+                System.out.println("Wrong direction! Please enter valid value.");
         }
     }
 }
