@@ -1,11 +1,11 @@
 package com.company;
 
 public class UpTreeBuilder implements TreeBuilder {
-    public void build(int lvl, String item){
+    public void build(int level, String item){
         int k = 0;
 
-        for (int i = 1; i <= lvl; ++i, k = 0) {
-            for (int space = 1; space <= lvl - i; ++space) {
+        for (int i = 1; i <= level; ++i, k = 0) {
+            for (int space = 1; space <= level - i; ++space) {
                 System.out.print(" ");
             }
 
